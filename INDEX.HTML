@@ -1,0 +1,3138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Enhanced mobile viewport settings -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>✨ Smart Expiry Tracker Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
+    <style>
+        /* Mobile-First CSS Reset */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --urgent-gradient: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            --warning-gradient: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+            --good-gradient: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            --info-gradient: linear-gradient(135deg, #36d1dc 0%, #5b86e5 100%);
+            --dark-gradient: linear-gradient(135deg, #141e30 0%, #243b55 100%);
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --safe-area-inset-top: env(safe-area-inset-top);
+            --safe-area-inset-bottom: env(safe-area-inset-bottom);
+            --safe-area-inset-left: env(safe-area-inset-left);
+            --safe-area-inset-right: env(safe-area-inset-right);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        html {
+            font-size: 14px;
+            height: -webkit-fill-available;
+        }
+        
+        body {
+            font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--light-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            padding: 0;
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.5;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+        }
+        
+        /* Container optimization for mobile */
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            background: var(--card-bg);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        
+        /* Welcome screen mobile optimization */
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--dark-gradient);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 16px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .welcome-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 32px 24px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            width: 100%;
+            max-width: 100%;
+            box-shadow: var(--shadow-lg);
+            margin: 0 16px;
+        }
+        
+        .welcome-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .welcome-container h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        
+        .welcome-container p {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        
+        .welcome-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .welcome-feature {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            padding: 12px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* Header mobile optimization */
+        header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 20px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo i {
+            font-size: 32px;
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
+        .logo h1 {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .logo p {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-top: 2px;
+        }
+        
+        .header-controls {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        
+        .item-count {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            justify-content: center;
+        }
+        
+        .btn-sm {
+            padding: 10px 12px;
+            font-size: 12px;
+            border-radius: var(--radius-md);
+        }
+        
+        /* Navigation mobile optimization */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            padding: 8px 4px;
+        }
+        
+        nav::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .nav-btn {
+            padding: 12px 16px;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            min-width: auto;
+            flex: 1;
+        }
+        
+        .nav-btn i {
+            font-size: 16px;
+        }
+        
+        .alert-count {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 2px solid white;
+        }
+        
+        /* Content mobile optimization */
+        .content {
+            padding: 16px;
+            min-height: auto;
+        }
+        
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+        }
+        
+        .section-header h2 {
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-header h2 i {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 10px;
+            border-radius: var(--radius-md);
+            font-size: 18px;
+            width: 44px;
+            height: 44px;
+            flex-shrink: 0;
+        }
+        
+        /* Bubble container mobile optimization */
+        .bubble-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        
+        .expiry-bubble {
+            padding: 20px;
+            border-radius: var(--radius-lg);
+            color: white;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .expiry-bubble:active {
+            transform: scale(0.98);
+        }
+        
+        .bubble-header {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        
+        .barcode {
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 12px;
+            word-break: break-all;
+            max-width: 100%;
+        }
+        
+        .expiry-date {
+            font-weight: 700;
+            font-size: 12px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 8px 16px;
+            border-radius: 20px;
+            white-space: nowrap;
+            align-self: flex-start;
+        }
+        
+        .product-description {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+            word-break: break-word;
+            padding-right: 60px;
+        }
+        
+        .product-quantity {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .days-left {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 12px;
+            align-self: flex-start;
+        }
+        
+        .urgent-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: linear-gradient(135deg, #ff3838 0%, #ff1e1e 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 11px;
+            box-shadow: 0 4px 12px rgba(255, 56, 56, 0.3);
+            text-align: center;
+            line-height: 1.2;
+            padding: 8px;
+            z-index: 2;
+        }
+        
+        /* Statistics panel mobile optimization */
+        .statistics-panel {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: 900;
+            color: #667eea;
+            margin: 12px 0;
+        }
+        
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        /* Table mobile optimization */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-top: 16px;
+            border-radius: var(--radius-md);
+            background: white;
+            position: relative;
+        }
+        
+        .product-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+        
+        .product-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: left;
+            padding: 14px 12px;
+            font-weight: 600;
+            font-size: 12px;
+            position: sticky;
+            top: 0;
+            white-space: nowrap;
+        }
+        
+        .product-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            font-size: 12px;
+        }
+        
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-block;
+            min-width: 70px;
+            text-align: center;
+        }
+        
+        /* Form mobile optimization */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            background: white;
+            color: var(--text-primary);
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        input[type="date"].form-control {
+            min-height: 48px;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .category-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .category-option {
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            background: white;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        /* Notes section mobile optimization */
+        .notes-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-top: 16px;
+        }
+        
+        .notes-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        
+        .notes-header h4 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .notes-textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            resize: vertical;
+        }
+        
+        /* Modal mobile optimization */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1002;
+            padding: 16px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-container {
+            background: white;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 100%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .modal-content {
+            padding: 24px 20px;
+            overflow-y: auto;
+            flex: 1;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .modal-footer {
+            padding: 20px;
+            background: linear-gradient(135deg, #f8fafc, #edf2f7);
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .modal-footer button {
+            width: 100%;
+            padding: 14px;
+        }
+        
+        /* Toast mobile optimization */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 16px;
+            right: 16px;
+            transform: none;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-primary);
+            padding: 16px 20px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            z-index: 1003;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        /* Sound alert indicator mobile optimization */
+        .sound-alert-indicator {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            right: 16px;
+            background: var(--urgent-gradient);
+            color: white;
+            padding: 16px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            z-index: 999;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            animation: slideInDown 0.3s ease-out;
+        }
+        
+        /* FAB mobile optimization */
+        .fab {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 998;
+            transition: transform 0.2s ease;
+        }
+        
+        .fab:active {
+            transform: scale(0.95);
+        }
+        
+        #printBtn {
+            bottom: 90px;
+            background: var(--warning-gradient);
+        }
+        
+        /* Search and filter bar mobile optimization */
+        #searchProducts {
+            min-height: 48px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #64748b;
+        }
+        
+        .empty-state h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        
+        /* Batch actions mobile optimization */
+        .batch-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding: 16px;
+            background: linear-gradient(135deg, #f8fafc, #edf2f7);
+            border-radius: var(--radius-md);
+        }
+        
+        .select-all-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: var(--text-primary);
+            padding: 10px;
+            background: white;
+            border-radius: var(--radius-md);
+        }
+        
+        /* Alert settings mobile optimization */
+        .alert-settings {
+            background: white;
+            padding: 24px 20px;
+            border-radius: var(--radius-lg);
+            margin-top: 20px;
+        }
+        
+        .settings-row {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8fafc, #edf2f7);
+            border-radius: var(--radius-md);
+        }
+        
+        /* Footer mobile optimization */
+        footer {
+            background: var(--dark-gradient);
+            color: white;
+            text-align: center;
+            padding: 32px 20px;
+            margin-top: 40px;
+        }
+        
+        /* Touch-friendly button sizing */
+        .btn {
+            padding: 14px 24px;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+            min-height: 48px;
+            min-width: 44px;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        /* Action buttons touch optimization */
+        .action-btn {
+            background: linear-gradient(135deg, #f8fafc, #edf2f7);
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            font-size: 18px;
+            color: #64748b;
+            padding: 10px;
+            border-radius: var(--radius-md);
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Input touch optimization */
+        input, textarea, select {
+            font-size: 16px !important; /* Prevents zoom on iOS */
+            touch-action: manipulation;
+        }
+        
+        /* Hide scrollbars but keep functionality */
+        .modal-content::-webkit-scrollbar,
+        .table-container::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* iPhone X+ safe area support */
+        @supports(padding: max(0px)) {
+            body {
+                padding-left: max(16px, env(safe-area-inset-left));
+                padding-right: max(16px, env(safe-area-inset-right));
+                padding-bottom: max(16px, env(safe-area-inset-bottom));
+            }
+            
+            .fab {
+                bottom: max(20px, env(safe-area-inset-bottom));
+                right: max(20px, env(safe-area-inset-right));
+            }
+            
+            #printBtn {
+                bottom: max(90px, calc(env(safe-area-inset-bottom) + 70px));
+                right: max(20px, env(safe-area-inset-right));
+            }
+        }
+        
+        /* Tablet and larger screens */
+        @media (min-width: 768px) {
+            html {
+                font-size: 16px;
+            }
+            
+            body {
+                padding: 20px;
+            }
+            
+            .container {
+                border-radius: var(--radius-xl);
+                box-shadow: var(--shadow-lg);
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            
+            .welcome-container {
+                max-width: 500px;
+                padding: 40px 32px;
+            }
+            
+            .welcome-icon {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .welcome-container h2 {
+                font-size: 32px;
+            }
+            
+            .welcome-container p {
+                font-size: 16px;
+            }
+            
+            header {
+                padding: 24px 32px;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            .logo h1 {
+                font-size: 24px;
+            }
+            
+            .header-controls {
+                display: flex;
+                gap: 12px;
+            }
+            
+            .nav-btn {
+                padding: 16px 20px;
+                font-size: 14px;
+                min-width: 140px;
+            }
+            
+            .content {
+                padding: 32px;
+            }
+            
+            .section-header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .bubble-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 20px;
+            }
+            
+            .statistics-panel {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+            }
+            
+            .form-row {
+                flex-direction: row;
+            }
+            
+            .category-options {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .modal-container {
+                max-width: 600px;
+            }
+            
+            .modal-footer {
+                flex-direction: row;
+            }
+            
+            .modal-footer button {
+                flex: 1;
+            }
+            
+            .toast {
+                left: 50%;
+                transform: translateX(-50%);
+                width: auto;
+                max-width: 500px;
+            }
+            
+            .sound-alert-indicator {
+                left: auto;
+                right: 20px;
+                width: auto;
+            }
+        }
+        
+        /* Large screens */
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1400px;
+            }
+            
+            .bubble-container {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            }
+        }
+        
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --light-bg: #1a202c;
+                --card-bg: #2d3748;
+                --text-primary: #f7fafc;
+                --text-secondary: #cbd5e0;
+            }
+            
+            .form-control,
+            .notes-textarea,
+            .stat-card,
+            .select-all-checkbox,
+            .settings-row,
+            .alert-settings {
+                background: #2d3748;
+                color: #f7fafc;
+                border-color: #4a5568;
+            }
+            
+            .category-option {
+                background: #2d3748;
+                border-color: #4a5568;
+                color: #f7fafc;
+            }
+        }
+        
+        /* Animations */
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            .fab,
+            nav,
+            .header-controls,
+            .sound-alert-indicator {
+                display: none !important;
+            }
+            
+            body {
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div id="welcomeScreen" class="welcome-screen">
+        <div class="welcome-container">
+            <div class="welcome-icon">
+                <i class="fas fa-clock" style="font-size: 40px; color: white;"></i>
+            </div>
+            <h2>✨ Smart Expiry Tracker</h2>
+            <p>Manage your inventory with real-time alerts on mobile</p>
+            
+            <div class="welcome-features">
+                <div class="welcome-feature">
+                    <i class="fas fa-bell"></i>
+                    <span>Sound Alerts</span>
+                </div>
+                <div class="welcome-feature">
+                    <i class="fas fa-palette"></i>
+                    <span>Visual Coding</span>
+                </div>
+                <div class="welcome-feature">
+                    <i class="fas fa-edit"></i>
+                    <span>Notes System</span>
+                </div>
+                <div class="welcome-feature">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span>Import/Export</span>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" id="startSystem" style="margin-top: 24px; width: 100%;">
+                <i class="fas fa-rocket"></i> Launch System
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container" id="mainContainer" style="display: none;">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <i class="fas fa-clock"></i>
+                <div>
+                    <h1>Smart Expiry Tracker</h1>
+                    <p>Mobile Inventory Management</p>
+                </div>
+            </div>
+            <div class="header-controls">
+                <div class="item-count">
+                    <i class="fas fa-boxes"></i> <span id="totalItems">0</span>
+                </div>
+                <div class="item-count" style="background: rgba(255, 65, 108, 0.25);">
+                    <i class="fas fa-exclamation-triangle"></i> <span id="urgentCount">0</span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Navigation -->
+        <nav>
+            <button class="nav-btn active" data-section="expiring">
+                <i class="fas fa-exclamation-triangle"></i> Expiring
+                <span class="alert-count" id="navUrgentCount" style="display: none;">0</span>
+            </button>
+            <button class="nav-btn" data-section="expired">
+                <i class="fas fa-calendar-times"></i> Expired
+                <span class="alert-count" id="navExpiredCount" style="display: none;">0</span>
+            </button>
+            <button class="nav-btn" data-section="add">
+                <i class="fas fa-plus-circle"></i> Add
+            </button>
+            <button class="nav-btn" data-section="all">
+                <i class="fas fa-list"></i> All
+            </button>
+        </nav>
+        
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Expiring Soon Section -->
+            <section id="expiringSection" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-exclamation-triangle"></i> Expiring Soon</h2>
+                    <div class="item-count">
+                        <i class="fas fa-clock"></i> <span id="expiringCount">0</span>
+                    </div>
+                </div>
+                
+                <!-- Quick Stats -->
+                <div class="statistics-panel">
+                    <div class="stat-card">
+                        <i class="fas fa-fire" style="color: #ff416c;"></i>
+                        <div class="stat-value" id="urgentStat">0</div>
+                        <div class="stat-label">Urgent</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-exclamation" style="color: #f7971e;"></i>
+                        <div class="stat-value" id="warningStat">0</div>
+                        <div class="stat-label">Warning</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-check" style="color: #56ab2f;"></i>
+                        <div class="stat-value" id="goodStat">0</div>
+                        <div class="stat-label">Good</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-layer-group" style="color: #667eea;"></i>
+                        <div class="stat-value" id="categoryStat">0</div>
+                        <div class="stat-label">Categories</div>
+                    </div>
+                </div>
+                
+                <div id="expiringBubbles" class="bubble-container">
+                    <!-- Expiring items will appear here -->
+                </div>
+                <div id="noExpiringItems" class="empty-state" style="display: none;">
+                    <i class="fas fa-check-circle" style="font-size: 48px; color: #94a3b8; margin-bottom: 16px;"></i>
+                    <h3>No Items Expiring Soon</h3>
+                    <p>All products are safely within their expiry dates.</p>
+                </div>
+            </section>
+
+            <!-- Expired Items Section -->
+            <section id="expiredSection" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-times"></i> Expired Items</h2>
+                    <div class="item-count" style="background: rgba(255, 65, 108, 0.25);">
+                        <i class="fas fa-exclamation-circle"></i> <span id="expiredCount">0</span>
+                    </div>
+                </div>
+                
+                <!-- Notes for Expired Items -->
+                <div class="notes-section">
+                    <div class="notes-header">
+                        <i class="fas fa-edit" style="color: #667eea;"></i>
+                        <h4>Notes for Expired Products</h4>
+                    </div>
+                    <textarea class="notes-textarea" id="expiredNotes" placeholder="Add notes about expired products..."></textarea>
+                    <div class="notes-display" id="expiredNotesDisplay">
+                        No notes added yet.
+                    </div>
+                </div>
+                
+                <!-- Bulk Actions -->
+                <div class="batch-actions">
+                    <div class="select-all-checkbox">
+                        <input type="checkbox" id="selectAllExpired" onchange="toggleSelectAllExpired()">
+                        <label for="selectAllExpired">Select All</label>
+                    </div>
+                    <button class="btn btn-danger btn-sm" onclick="bulkDeleteSelected()" id="bulkDeleteBtn">
+                        <i class="fas fa-trash"></i> Delete Selected (<span id="selectedCount">0</span>)
+                    </button>
+                </div>
+                
+                <div class="table-container">
+                    <table class="product-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 40px;">
+                                    <input type="checkbox" id="headerCheckbox" onchange="toggleAllCheckboxes()">
+                                </th>
+                                <th>Barcode</th>
+                                <th>Description</th>
+                                <th>Qty</th>
+                                <th>Expiry Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expiredTableBody">
+                            <!-- Expired items will appear here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noExpiredItems" class="empty-state" style="display: none;">
+                    <i class="fas fa-check-circle" style="font-size: 48px; color: #94a3b8; margin-bottom: 16px;"></i>
+                    <h3>No Expired Items</h3>
+                    <p>Excellent! All products are within their expiry dates.</p>
+                </div>
+            </section>
+            
+            <!-- Add Product Section -->
+            <section id="addSection" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-plus-circle"></i> Add New Product</h2>
+                </div>
+                
+                <div class="add-form">
+                    <form id="addProductForm">
+                        <div class="form-group">
+                            <label for="barcode"><i class="fas fa-barcode"></i> Barcode</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="text" id="barcode" class="form-control" placeholder="Enter barcode" required>
+                                <button type="button" class="btn btn-sm btn-info" onclick="generateBarcode()" style="white-space: nowrap;">
+                                    <i class="fas fa-random"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="description"><i class="fas fa-tag"></i> Product Description</label>
+                            <input type="text" id="description" class="form-control" placeholder="Enter product name" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiryDate"><i class="fas fa-calendar-alt"></i> Expiry Date</label>
+                                <input type="date" id="expiryDate" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="quantity"><i class="fas fa-cubes"></i> Quantity</label>
+                                <input type="number" id="quantity" class="form-control" min="1" placeholder="Qty" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category"><i class="fas fa-layer-group"></i> Category</label>
+                            <div class="category-options">
+                                <button type="button" class="category-option" data-category="Beverages and Dairy">
+                                    <i class="fas fa-wine-bottle"></i> Beverages
+                                </button>
+                                <button type="button" class="category-option" data-category="Confectionery">
+                                    <i class="fas fa-candy-cane"></i> Confectionery
+                                </button>
+                                <button type="button" class="category-option" data-category="Grocery">
+                                    <i class="fas fa-shopping-basket"></i> Grocery
+                                </button>
+                                <button type="button" class="category-option" data-category="Ice Cream">
+                                    <i class="fas fa-ice-cream"></i> Ice Cream
+                                </button>
+                                <button type="button" class="category-option" data-category="Snacks">
+                                    <i class="fas fa-cookie-bite"></i> Snacks
+                                </button>
+                                <button type="button" class="category-option" data-category="Other">
+                                    <i class="fas fa-box"></i> Other
+                                </button>
+                            </div>
+                            <input type="text" id="category" class="form-control" style="margin-top: 12px;" placeholder="Or enter custom category" value="Beverages and Dairy">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productNotes"><i class="fas fa-edit"></i> Notes (Optional)</label>
+                            <textarea class="form-control" id="productNotes" placeholder="Add notes about this product..." rows="3"></textarea>
+                        </div>
+                        
+                        <div class="form-group" style="margin-top: 24px;">
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                                <i class="fas fa-save"></i> Save Product
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- All Products Section -->
+            <section id="allSection" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-list"></i> All Products</h2>
+                    <div class="item-count">
+                        <i class="fas fa-boxes"></i> <span id="allProductsCount">0</span>
+                    </div>
+                </div>
+                
+                <!-- Search -->
+                <div style="margin-bottom: 20px;">
+                    <div style="position: relative;">
+                        <i class="fas fa-search" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #94a3b8;"></i>
+                        <input type="text" id="searchProducts" class="form-control" placeholder="Search products..." style="padding-left: 44px;">
+                    </div>
+                </div>
+                
+                <!-- Quick Stats -->
+                <div class="statistics-panel" style="margin-bottom: 20px;">
+                    <div class="stat-card">
+                        <i class="fas fa-clock" style="color: #667eea;"></i>
+                        <div class="stat-value" id="totalStat">0</div>
+                        <div class="stat-label">Total</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-fire" style="color: #ff416c;"></i>
+                        <div class="stat-value" id="allUrgentStat">0</div>
+                        <div class="stat-label">Urgent</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-calendar-times" style="color: #ff416c;"></i>
+                        <div class="stat-value" id="allExpiredStat">0</div>
+                        <div class="stat-label">Expired</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-calendar-check" style="color: #56ab2f;"></i>
+                        <div class="stat-value" id="safeStat">0</div>
+                        <div class="stat-label">Safe</div>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="product-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 40px;">
+                                    <input type="checkbox" id="selectAllHeader" onchange="toggleSelectAllProducts()">
+                                </th>
+                                <th>Barcode</th>
+                                <th>Description</th>
+                                <th>Expiry Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="allProductsTableBody">
+                            <!-- All products will appear here -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div id="noProducts" class="empty-state" style="display: none;">
+                    <i class="fas fa-box-open" style="font-size: 48px; color: #94a3b8; margin-bottom: 16px;"></i>
+                    <h3>No Products Added Yet</h3>
+                    <p>Start by adding your first product.</p>
+                    <button class="btn btn-primary" onclick="switchSection('add')" style="margin-top: 16px;">
+                        <i class="fas fa-plus-circle"></i> Add First Product
+                    </button>
+                </div>
+                
+                <!-- Bulk Actions -->
+                <div style="margin-top: 20px;">
+                    <button class="btn btn-danger btn-sm" onclick="bulkDeleteSelectedProducts()" style="width: 100%;">
+                        <i class="fas fa-trash"></i> Delete Selected Items (<span id="selectedProductsCount">0</span>)
+                    </button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Modals and other components remain the same but will use the optimized CSS -->
+    <!-- Delete Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-container">
+            <div class="modal-content">
+                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #ff416c, #ff4b2b); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 36px; color: white;"></i>
+                </div>
+                <h2 style="color: #ff416c; font-size: 20px; text-align: center;">Confirm Deletion</h2>
+                <p id="deleteMessage" style="margin: 16px 0; font-size: 14px; text-align: center;">
+                    Are you sure you want to delete this item?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" id="confirmDelete">
+                    <i class="fas fa-trash-alt"></i> Delete
+                </button>
+                <button class="btn" id="cancelDelete">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Details Modal -->
+    <div id="productDetailsModal" class="modal">
+        <div class="modal-container">
+            <div class="modal-content" id="productDetailsContent">
+                <!-- Product details will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="editProductBtn">
+                    <i class="fas fa-edit"></i> Edit
+                </button>
+                <button class="btn btn-danger" id="deleteProductBtn">
+                    <i class="fas fa-trash-alt"></i> Delete
+                </button>
+                <button class="btn" id="closeDetailsBtn">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Operation completed!</span>
+    </div>
+
+    <!-- Sound Alert Indicator -->
+    <div id="soundAlertIndicator" class="sound-alert-indicator">
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <i class="fas fa-bell" style="font-size: 20px; color: white;"></i>
+            <div>
+                <div id="alertCountText" style="font-weight: 600; font-size: 14px;">0 items expiring!</div>
+                <div style="font-size: 12px; opacity: 0.9;">Tap to acknowledge</div>
+            </div>
+        </div>
+        <button class="btn btn-sm" onclick="acknowledgeAlerts()" style="color: white; background: rgba(255, 255, 255, 0.2); border: none; padding: 8px;">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Floating Action Buttons -->
+    <button class="fab" id="quickAddBtn" title="Add Product">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <button class="fab" id="printBtn" title="Print">
+        <i class="fas fa-print"></i>
+    </button>
+
+    <!-- JavaScript remains the same but will work with optimized CSS -->
+    <script>
+        // Your existing JavaScript code remains exactly the same
+        // ======================
+        // MAIN APPLICATION SCRIPT - ENHANCED VERSION
+        // ======================
+
+        // Core Application State
+        const AppState = {
+            products: [],
+            filteredProducts: [],
+            currentSection: 'expiring',
+            customSound: null,
+            customSoundURL: null,
+            alertHistory: [],
+            settings: {
+                immediateAlert: true,
+                continuousAlert: true,
+                desktopNotifications: false,
+                alertVolume: 80,
+                alertFrequency: '5min',
+                urgentThreshold: 3,
+                warningThreshold: 7,
+                checkFrequency: 60,
+                useCustomSound: false
+            },
+            selectedProducts: [],
+            selectedExpired: [],
+            startupTime: new Date(),
+            alertsToday: 0,
+            alertInterval: null,
+            acknowledgedAlerts: false,
+            alertTimeout: null,
+            notes: {
+                expired: '',
+                addedProducts: []
+            },
+            currentProductToDelete: null,
+            currentProductToView: null
+        };
+
+        // Initialize Audio
+        const audioElements = {
+            save: new Audio(),
+            delete: new Audio(),
+            alert: new Audio(),
+            notification: new Audio(),
+            click: new Audio(),
+            custom: new Audio()
+        };
+
+        // DOM Elements
+        const elements = {};
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeElements();
+            initializeEventListeners();
+            loadFromLocalStorage();
+            initializeWelcomeScreen();
+            updateCurrentYear();
+            
+            // Initialize sound effects
+            initializeSoundEffects();
+            
+            // Set initial volume
+            updateAlertVolume(80);
+            
+            // Initialize alert system
+            setTimeout(() => {
+                checkForUrgentItems();
+            }, 1000);
+        });
+
+        // Initialize DOM element references
+        function initializeElements() {
+            // Main sections
+            elements.mainContainer = document.getElementById('mainContainer');
+            elements.welcomeScreen = document.getElementById('welcomeScreen');
+            elements.startSystem = document.getElementById('startSystem');
+            
+            // Toast and modals
+            elements.toast = document.getElementById('toast');
+            elements.toastMessage = document.getElementById('toastMessage');
+            elements.deleteModal = document.getElementById('deleteModal');
+            elements.deleteMessage = document.getElementById('deleteMessage');
+            elements.confirmDelete = document.getElementById('confirmDelete');
+            elements.cancelDelete = document.getElementById('cancelDelete');
+            
+            // Product details modal
+            elements.productDetailsModal = document.getElementById('productDetailsModal');
+            elements.productDetailsContent = document.getElementById('productDetailsContent');
+            elements.editProductBtn = document.getElementById('editProductBtn');
+            elements.deleteProductBtn = document.getElementById('deleteProductBtn');
+            elements.closeDetailsBtn = document.getElementById('closeDetailsBtn');
+            
+            // Alert indicator
+            elements.soundAlertIndicator = document.getElementById('soundAlertIndicator');
+            elements.alertCountText = document.getElementById('alertCountText');
+            
+            // Navigation
+            elements.navBtns = document.querySelectorAll('.nav-btn');
+            
+            // Sections
+            elements.sections = {
+                expiring: document.getElementById('expiringSection'),
+                expired: document.getElementById('expiredSection'),
+                add: document.getElementById('addSection'),
+                all: document.getElementById('allSection')
+            };
+            
+            // Count elements
+            elements.totalItems = document.getElementById('totalItems');
+            elements.urgentCount = document.getElementById('urgentCount');
+            elements.navUrgentCount = document.getElementById('navUrgentCount');
+            elements.navExpiredCount = document.getElementById('navExpiredCount');
+            elements.expiringCount = document.getElementById('expiringCount');
+            elements.expiredCount = document.getElementById('expiredCount');
+            elements.allProductsCount = document.getElementById('allProductsCount');
+            
+            // Statistics
+            elements.urgentStat = document.getElementById('urgentStat');
+            elements.warningStat = document.getElementById('warningStat');
+            elements.goodStat = document.getElementById('goodStat');
+            elements.categoryStat = document.getElementById('categoryStat');
+            
+            // Form elements
+            elements.addProductForm = document.getElementById('addProductForm');
+            elements.barcode = document.getElementById('barcode');
+            elements.description = document.getElementById('description');
+            elements.expiryDate = document.getElementById('expiryDate');
+            elements.category = document.getElementById('category');
+            elements.quantity = document.getElementById('quantity');
+            
+            // Notes elements
+            elements.productNotes = document.getElementById('productNotes');
+            elements.expiredNotes = document.getElementById('expiredNotes');
+            elements.expiredNotesDisplay = document.getElementById('expiredNotesDisplay');
+            
+            // Bubble container
+            elements.expiringBubbles = document.getElementById('expiringBubbles');
+            elements.noExpiringItems = document.getElementById('noExpiringItems');
+            elements.noExpiredItems = document.getElementById('noExpiredItems');
+            elements.noProducts = document.getElementById('noProducts');
+            
+            // Tables
+            elements.expiredTableBody = document.getElementById('expiredTableBody');
+            elements.allProductsTableBody = document.getElementById('allProductsTableBody');
+            
+            // Search and filter
+            elements.searchProducts = document.getElementById('searchProducts');
+            
+            // Buttons
+            elements.quickAddBtn = document.getElementById('quickAddBtn');
+            elements.printBtn = document.getElementById('printBtn');
+        }
+
+        // Initialize event listeners
+        function initializeEventListeners() {
+            // Welcome screen
+            elements.startSystem.addEventListener('click', launchSystem);
+            
+            // Navigation
+            elements.navBtns.forEach(btn => {
+                btn.addEventListener('click', () => switchSection(btn.dataset.section));
+            });
+            
+            // Delete modal
+            elements.confirmDelete.addEventListener('click', confirmDeletion);
+            elements.cancelDelete.addEventListener('click', hideDeleteModal);
+            
+            // Product details modal
+            elements.editProductBtn.addEventListener('click', function() {
+                if (AppState.currentProductToView) {
+                    editProduct(AppState.currentProductToView);
+                    hideProductDetailsModal();
+                }
+            });
+            
+            elements.deleteProductBtn.addEventListener('click', function() {
+                if (AppState.currentProductToView) {
+                    const product = AppState.products.find(p => p.id === AppState.currentProductToView);
+                    if (product) {
+                        showDeleteModal(product.id, product.description);
+                        hideProductDetailsModal();
+                    }
+                }
+            });
+            
+            elements.closeDetailsBtn.addEventListener('click', hideProductDetailsModal);
+            
+            // Form submission
+            elements.addProductForm.addEventListener('submit', addProduct);
+            
+            // Category selection
+            document.querySelectorAll('.category-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    elements.category.value = this.dataset.category;
+                    playClickSound();
+                });
+            });
+            
+            // Search and filter
+            elements.searchProducts.addEventListener('input', filterProducts);
+            
+            // Expired notes
+            if (elements.expiredNotes) {
+                elements.expiredNotes.addEventListener('input', function() {
+                    AppState.notes.expired = this.value;
+                    saveToLocalStorage();
+                });
+            }
+            
+            // Quick add button
+            if (elements.quickAddBtn) elements.quickAddBtn.addEventListener('click', function() {
+                switchSection('add');
+                playClickSound();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // Print button
+            if (elements.printBtn) elements.printBtn.addEventListener('click', printData);
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', handleKeyboardShortcuts);
+            
+            // Window events
+            window.addEventListener('beforeunload', saveToLocalStorage);
+        }
+
+        // ======================
+        // CORE FUNCTIONALITY
+        // ======================
+
+        // Launch the system
+        function launchSystem() {
+            localStorage.setItem('systemLaunched', 'true');
+            elements.welcomeScreen.style.display = 'none';
+            elements.mainContainer.style.display = 'block';
+            showToast('Welcome to Smart Expiry Tracker!', 'success');
+            
+            // Set expiry date to 30 days from now
+            const futureDate = new Date();
+            futureDate.setDate(futureDate.getDate() + 30);
+            if (elements.expiryDate) {
+                elements.expiryDate.value = futureDate.toISOString().split('T')[0];
+            }
+            
+            // Check for urgent items immediately
+            checkForUrgentItems();
+            
+            // Start periodic checks
+            startPeriodicChecks();
+        }
+
+        // Switch between sections
+        function switchSection(section) {
+            // Update navigation
+            elements.navBtns.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.section === section) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update sections
+            Object.keys(elements.sections).forEach(key => {
+                if (elements.sections[key]) {
+                    elements.sections[key].style.display = 'none';
+                }
+            });
+            
+            if (elements.sections[section]) {
+                elements.sections[section].style.display = 'block';
+            }
+            
+            // Update state
+            AppState.currentSection = section;
+            
+            // Load section-specific data
+            switch(section) {
+                case 'expiring':
+                    loadExpiringItems();
+                    break;
+                case 'expired':
+                    loadExpiredItems();
+                    if (elements.expiredNotes && AppState.notes.expired) {
+                        elements.expiredNotes.value = AppState.notes.expired;
+                        elements.expiredNotesDisplay.textContent = AppState.notes.expired || 'No notes added yet.';
+                    }
+                    break;
+                case 'all':
+                    loadAllProducts();
+                    break;
+            }
+            
+            playClickSound();
+        }
+
+        // ======================
+        // PRODUCT MANAGEMENT
+        // ======================
+
+        // Add a new product
+        function addProduct(e) {
+            e.preventDefault();
+            
+            // Validate required fields
+            if (!elements.barcode.value || !elements.description.value || !elements.expiryDate.value || !elements.quantity.value) {
+                showToast('Please fill in all required fields', 'error');
+                return;
+            }
+            
+            // Create product object
+            const product = {
+                id: generateId(),
+                barcode: elements.barcode.value,
+                description: elements.description.value,
+                expiryDate: elements.expiryDate.value,
+                category: elements.category.value || 'Other',
+                quantity: parseInt(elements.quantity.value),
+                notes: elements.productNotes ? elements.productNotes.value : '',
+                addedDate: new Date().toISOString().split('T')[0],
+                daysLeft: calculateDaysLeft(elements.expiryDate.value)
+            };
+            
+            // Add to products array
+            AppState.products.push(product);
+            
+            // Add note for added product
+            if (elements.productNotes && elements.productNotes.value) {
+                AppState.notes.addedProducts.push({
+                    productId: product.id,
+                    productName: product.description,
+                    note: elements.productNotes.value,
+                    date: new Date().toISOString()
+                });
+            }
+            
+            // Show success message
+            showToast(`Added "${product.description}" successfully!`, 'success');
+            playSaveSound();
+            
+            // Clear form
+            clearAddForm();
+            
+            // Update all displays
+            updateAllDisplays();
+            
+            // Check if urgent
+            if (product.daysLeft <= AppState.settings.urgentThreshold) {
+                triggerImmediateAlert(`New urgent item added: ${product.description}`);
+            }
+            
+            // Save to local storage
+            saveToLocalStorage();
+        }
+
+        // Generate a unique ID
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2);
+        }
+
+        // Calculate days left until expiry
+        function calculateDaysLeft(expiryDate) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            const expiry = new Date(expiryDate);
+            expiry.setHours(0, 0, 0, 0);
+            
+            const diffTime = expiry.getTime() - today.getTime();
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            return diffDays;
+        }
+
+        // Get status based on days left
+        function getStatus(daysLeft) {
+            if (daysLeft < 0) return 'expired';
+            if (daysLeft <= AppState.settings.urgentThreshold) return 'urgent';
+            if (daysLeft <= AppState.settings.warningThreshold) return 'warning';
+            if (daysLeft <= 10) return 'good';
+            return 'safe';
+        }
+
+        // Get status class
+        function getStatusClass(daysLeft) {
+            const status = getStatus(daysLeft);
+            switch(status) {
+                case 'expired': return 'status-expired';
+                case 'urgent': return 'status-urgent';
+                case 'warning': return 'status-warning';
+                case 'good': return 'status-good';
+                default: return 'status-safe';
+            }
+        }
+
+        // Get status text
+        function getStatusText(daysLeft) {
+            const status = getStatus(daysLeft);
+            switch(status) {
+                case 'expired': return 'EXPIRED';
+                case 'urgent': return 'URGENT';
+                case 'warning': return 'WARNING';
+                case 'good': return 'GOOD';
+                default: return 'SAFE';
+            }
+        }
+
+        // Generate barcode
+        function generateBarcode() {
+            const prefix = 'PROD';
+            const random = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+            elements.barcode.value = `${prefix}-${random}`;
+            playClickSound();
+        }
+
+        // Clear add form
+        function clearAddForm() {
+            elements.addProductForm.reset();
+            elements.category.value = 'Beverages and Dairy';
+            if (elements.productNotes) {
+                elements.productNotes.value = '';
+            }
+            
+            // Set expiry date to 30 days from now
+            const futureDate = new Date();
+            futureDate.setDate(futureDate.getDate() + 30);
+            elements.expiryDate.value = futureDate.toISOString().split('T')[0];
+        }
+
+        // Generate random product for testing
+        function generateRandomProduct() {
+            const products = [
+                { barcode: 'MILK-001', desc: 'Fresh Milk 1L', category: 'Beverages and Dairy', days: 5 },
+                { barcode: 'CHOC-002', desc: 'Chocolate Bar 100g', category: 'Confectionery', days: 30 },
+                { barcode: 'RICE-003', desc: 'Basmati Rice 5kg', category: 'Grocery', days: 90 },
+                { barcode: 'ICE-004', desc: 'Vanilla Ice Cream', category: 'Ice Cream', days: 15 },
+                { barcode: 'CHPS-005', desc: 'Potato Chips 200g', category: 'Snacks', days: 45 }
+            ];
+            
+            const random = products[Math.floor(Math.random() * products.length)];
+            const expiryDate = new Date();
+            expiryDate.setDate(expiryDate.getDate() + random.days);
+            
+            elements.barcode.value = random.barcode;
+            elements.description.value = random.desc;
+            elements.category.value = random.category;
+            elements.expiryDate.value = expiryDate.toISOString().split('T')[0];
+            elements.quantity.value = Math.floor(Math.random() * 50) + 10;
+            
+            showToast('Random product generated', 'info');
+            playClickSound();
+        }
+
+        // ======================
+        // DISPLAY FUNCTIONS
+        // ======================
+
+        // Update all displays
+        function updateAllDisplays() {
+            updateCounts();
+            loadExpiringItems();
+            loadExpiredItems();
+            loadAllProducts();
+            checkForUrgentItems();
+        }
+
+        // Update counts
+        function updateCounts() {
+            const total = AppState.products.length;
+            const urgent = AppState.products.filter(p => p.daysLeft <= AppState.settings.urgentThreshold && p.daysLeft >= 0).length;
+            const expired = AppState.products.filter(p => p.daysLeft < 0).length;
+            const expiring = AppState.products.filter(p => p.daysLeft >= 0 && p.daysLeft <= 10).length;
+            
+            // Update main counts
+            if (elements.totalItems) elements.totalItems.textContent = total;
+            if (elements.urgentCount) elements.urgentCount.textContent = urgent;
+            if (elements.navUrgentCount) {
+                elements.navUrgentCount.textContent = urgent;
+                elements.navUrgentCount.style.display = urgent > 0 ? 'flex' : 'none';
+            }
+            if (elements.navExpiredCount) {
+                elements.navExpiredCount.textContent = expired;
+                elements.navExpiredCount.style.display = expired > 0 ? 'flex' : 'none';
+            }
+            if (elements.expiringCount) elements.expiringCount.textContent = expiring;
+            if (elements.expiredCount) elements.expiredCount.textContent = expired;
+            if (elements.allProductsCount) elements.allProductsCount.textContent = total;
+            
+            // Update statistics
+            updateStatistics();
+        }
+
+        // Update statistics
+        function updateStatistics() {
+            const urgent = AppState.products.filter(p => p.daysLeft <= AppState.settings.urgentThreshold && p.daysLeft >= 0).length;
+            const warning = AppState.products.filter(p => p.daysLeft > AppState.settings.urgentThreshold && p.daysLeft <= AppState.settings.warningThreshold).length;
+            const good = AppState.products.filter(p => p.daysLeft > AppState.settings.warningThreshold && p.daysLeft <= 10).length;
+            const categories = new Set(AppState.products.map(p => p.category)).size;
+            
+            if (elements.urgentStat) elements.urgentStat.textContent = urgent;
+            if (elements.warningStat) elements.warningStat.textContent = warning;
+            if (elements.goodStat) elements.goodStat.textContent = good;
+            if (elements.categoryStat) elements.categoryStat.textContent = categories;
+        }
+
+        // Load expiring items
+        function loadExpiringItems() {
+            const container = elements.expiringBubbles;
+            const emptyState = elements.noExpiringItems;
+            
+            if (!container || !emptyState) return;
+            
+            // Filter items expiring in next 10 days
+            const expiringItems = AppState.products.filter(product => {
+                return product.daysLeft >= 0 && product.daysLeft <= 10;
+            });
+            
+            if (expiringItems.length === 0) {
+                container.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            container.innerHTML = '';
+            
+            // Sort by days left (closest first)
+            expiringItems.sort((a, b) => a.daysLeft - b.daysLeft);
+            
+            // Create bubbles for each item
+            expiringItems.forEach(product => {
+                const bubble = createExpiryBubble(product);
+                container.appendChild(bubble);
+            });
+        }
+
+        // Create expiry bubble element
+        function createExpiryBubble(product) {
+            const bubble = document.createElement('div');
+            bubble.className = `expiry-bubble ${getBubbleClass(product.daysLeft)}`;
+            bubble.dataset.id = product.id;
+            
+            // Add category class
+            const categoryClass = `category-${product.category.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
+            bubble.classList.add(categoryClass);
+            
+            let badgeHTML = '';
+            if (product.daysLeft <= AppState.settings.urgentThreshold) {
+                badgeHTML = `
+                    <div class="urgent-badge">
+                        URGENT
+                    </div>
+                `;
+            }
+            
+            bubble.innerHTML = `
+                ${badgeHTML}
+                <div class="bubble-header">
+                    <div class="barcode">${product.barcode}</div>
+                    <div class="expiry-date">${formatDate(product.expiryDate)}</div>
+                </div>
+                <div class="product-description">${product.description}</div>
+                <div class="product-quantity">
+                    <i class="fas fa-cubes"></i>
+                    Quantity: ${product.quantity}
+                </div>
+                <div class="days-left">
+                    ${product.daysLeft === 0 ? 'Expires TODAY!' : 
+                      product.daysLeft < 0 ? `${Math.abs(product.daysLeft)} days expired` : 
+                      `${product.daysLeft} days left`}
+                </div>
+            `;
+            
+            // Add click event to show details
+            bubble.addEventListener('click', () => {
+                showProductDetails(product.id);
+            });
+            
+            return bubble;
+        }
+
+        // Get bubble class based on days left
+        function getBubbleClass(daysLeft) {
+            if (daysLeft <= AppState.settings.urgentThreshold) return 'urgent';
+            if (daysLeft <= AppState.settings.warningThreshold) return 'warning';
+            if (daysLeft <= 10) return 'good';
+            return '';
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+
+        // Load expired items
+        function loadExpiredItems() {
+            const tableBody = elements.expiredTableBody;
+            const emptyState = elements.noExpiredItems;
+            
+            if (!tableBody || !emptyState) return;
+            
+            // Filter expired items
+            const expiredItems = AppState.products.filter(product => product.daysLeft < 0);
+            
+            if (expiredItems.length === 0) {
+                tableBody.innerHTML = '';
+                emptyState.style.display = 'block';
+                if (elements.expiredNotesDisplay) {
+                    elements.expiredNotesDisplay.textContent = 'No notes added yet.';
+                }
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            tableBody.innerHTML = '';
+            
+            // Sort by most expired first
+            expiredItems.sort((a, b) => a.daysLeft - b.daysLeft);
+            
+            // Add rows to table
+            expiredItems.forEach(product => {
+                const row = createExpiredTableRow(product);
+                tableBody.appendChild(row);
+            });
+            
+            // Update selected count
+            updateSelectedExpired();
+        }
+
+        // Create expired table row
+        function createExpiredTableRow(product) {
+            const row = document.createElement('tr');
+            row.dataset.id = product.id;
+            
+            row.innerHTML = `
+                <td>
+                    <input type="checkbox" class="expired-checkbox" data-id="${product.id}" onchange="updateSelectedExpired()">
+                </td>
+                <td>${product.barcode}</td>
+                <td>${product.description}</td>
+                <td>${product.quantity}</td>
+                <td>${formatDate(product.expiryDate)}</td>
+                <td>
+                    <div class="action-btn-container">
+                        <button class="action-btn" onclick="event.stopPropagation(); editProduct('${product.id}')" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn" onclick="event.stopPropagation(); showDeleteModal('${product.id}', '${product.description}')" title="Delete">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            `;
+            
+            // Make entire row clickable for details (except action buttons)
+            row.addEventListener('click', function(e) {
+                if (!e.target.closest('.action-btn') && !e.target.closest('input[type="checkbox"]')) {
+                    showProductDetails(product.id);
+                }
+            });
+            
+            return row;
+        }
+
+        // Load all products
+        function loadAllProducts() {
+            const tableBody = elements.allProductsTableBody;
+            const emptyState = elements.noProducts;
+            
+            if (!tableBody || !emptyState) return;
+            
+            if (AppState.products.length === 0) {
+                tableBody.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            tableBody.innerHTML = '';
+            
+            // Apply filtering
+            let filtered = [...AppState.products];
+            
+            // Apply search filter
+            const searchTerm = elements.searchProducts ? elements.searchProducts.value.toLowerCase() : '';
+            if (searchTerm) {
+                filtered = filtered.filter(product => 
+                    product.description.toLowerCase().includes(searchTerm) ||
+                    product.barcode.toLowerCase().includes(searchTerm) ||
+                    (product.category && product.category.toLowerCase().includes(searchTerm))
+                );
+            }
+            
+            // Sort by expiry (closest first)
+            filtered.sort((a, b) => a.daysLeft - b.daysLeft);
+            
+            // Update filtered products state
+            AppState.filteredProducts = filtered;
+            
+            // Add rows to table
+            filtered.forEach(product => {
+                const row = createAllProductsTableRow(product);
+                tableBody.appendChild(row);
+            });
+            
+            // Update selected count
+            updateSelectedProducts();
+        }
+
+        // Create all products table row
+        function createAllProductsTableRow(product) {
+            const row = document.createElement('tr');
+            row.dataset.id = product.id;
+            
+            const statusClass = getStatusClass(product.daysLeft);
+            const statusText = getStatusText(product.daysLeft);
+            
+            row.innerHTML = `
+                <td>
+                    <input type="checkbox" class="product-checkbox" data-id="${product.id}" onchange="updateSelectedProducts()">
+                </td>
+                <td>${product.barcode}</td>
+                <td>${product.description}</td>
+                <td>${formatDate(product.expiryDate)}</td>
+                <td>
+                    <span class="status-badge ${statusClass}">
+                        ${statusText}
+                    </span>
+                </td>
+                <td>
+                    <div class="action-btn-container">
+                        <button class="action-btn" onclick="event.stopPropagation(); editProduct('${product.id}')" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn" onclick="event.stopPropagation(); showDeleteModal('${product.id}', '${product.description}')" title="Delete">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            `;
+            
+            // Make entire row clickable for details (except action buttons)
+            row.addEventListener('click', function(e) {
+                if (!e.target.closest('.action-btn') && !e.target.closest('input[type="checkbox"]')) {
+                    showProductDetails(product.id);
+                }
+            });
+            
+            return row;
+        }
+
+        // Filter products
+        function filterProducts() {
+            loadAllProducts();
+        }
+
+        // ======================
+        // PRODUCT OPERATIONS
+        // ======================
+
+        // Show delete modal
+        function showDeleteModal(productId, productName) {
+            AppState.currentProductToDelete = productId;
+            if (elements.deleteMessage) {
+                elements.deleteMessage.textContent = `Are you sure you want to delete "${productName}"?`;
+            }
+            if (elements.deleteModal) {
+                elements.deleteModal.classList.add('active');
+            }
+            playClickSound();
+        }
+
+        // Hide delete modal
+        function hideDeleteModal() {
+            if (elements.deleteModal) {
+                elements.deleteModal.classList.remove('active');
+            }
+            AppState.currentProductToDelete = null;
+            playClickSound();
+        }
+
+        // Confirm deletion
+        function confirmDeletion() {
+            if (!AppState.currentProductToDelete) return;
+            
+            // Remove product from array
+            const index = AppState.products.findIndex(p => p.id === AppState.currentProductToDelete);
+            if (index !== -1) {
+                const productName = AppState.products[index].description;
+                AppState.products.splice(index, 1);
+                
+                // Show toast
+                showToast(`"${productName}" deleted successfully`, 'success');
+                playDeleteSound();
+                
+                // Update all displays
+                updateAllDisplays();
+                
+                // Save to local storage
+                saveToLocalStorage();
+            }
+            
+            // Hide modal
+            hideDeleteModal();
+        }
+
+        // Edit product
+        function editProduct(productId) {
+            const product = AppState.products.find(p => p.id === productId);
+            if (!product) return;
+            
+            // Switch to add section
+            switchSection('add');
+            
+            // Fill form with product data
+            elements.barcode.value = product.barcode;
+            elements.description.value = product.description;
+            elements.expiryDate.value = product.expiryDate;
+            elements.category.value = product.category;
+            elements.quantity.value = product.quantity;
+            
+            // Set product notes
+            if (elements.productNotes) {
+                elements.productNotes.value = product.notes || '';
+            }
+            
+            // Change form submit to update instead of add
+            elements.addProductForm.onsubmit = function(e) {
+                e.preventDefault();
+                updateProduct(productId);
+            };
+            
+            // Change button text
+            const submitBtn = elements.addProductForm.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.innerHTML = '<i class="fas fa-save"></i> Update Product';
+            }
+            
+            showToast('Edit product details', 'info');
+            playClickSound();
+        }
+
+        // Update product
+        function updateProduct(productId) {
+            const index = AppState.products.findIndex(p => p.id === productId);
+            if (index === -1) return;
+            
+            // Update product
+            AppState.products[index] = {
+                ...AppState.products[index],
+                barcode: elements.barcode.value,
+                description: elements.description.value,
+                expiryDate: elements.expiryDate.value,
+                category: elements.category.value || 'Other',
+                quantity: parseInt(elements.quantity.value),
+                notes: elements.productNotes ? elements.productNotes.value : '',
+                daysLeft: calculateDaysLeft(elements.expiryDate.value)
+            };
+            
+            // Show success message
+            showToast(`Updated "${AppState.products[index].description}" successfully!`, 'success');
+            playSaveSound();
+            
+            // Reset form
+            clearAddForm();
+            
+            // Restore original form submit handler
+            elements.addProductForm.onsubmit = addProduct;
+            
+            // Restore button text
+            const submitBtn = elements.addProductForm.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.innerHTML = '<i class="fas fa-save"></i> Save Product';
+            }
+            
+            // Update all displays
+            updateAllDisplays();
+            
+            // Save to local storage
+            saveToLocalStorage();
+        }
+
+        // Show product details
+        function showProductDetails(productId) {
+            const product = AppState.products.find(p => p.id === productId);
+            if (!product) return;
+            
+            AppState.currentProductToView = productId;
+            
+            const statusClass = getStatusClass(product.daysLeft);
+            const statusText = getStatusText(product.daysLeft);
+            
+            let notesHTML = '';
+            if (product.notes) {
+                notesHTML = `
+                    <div style="margin-top: 16px;">
+                        <div style="font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-sticky-note"></i> Product Notes
+                        </div>
+                        <div style="background: #f8fafc; padding: 12px; border-radius: var(--radius-sm);">
+                            ${product.notes}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            const modalHTML = `
+                <div style="text-align: center;">
+                    <div style="width: 80px; height: 80px; background: var(--primary-gradient); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                        <i class="fas fa-box" style="font-size: 36px; color: white;"></i>
+                    </div>
+                    <h2 style="color: #667eea; font-size: 20px; margin-bottom: 8px;">${product.description}</h2>
+                    <div style="background: #667eea; color: white; padding: 6px 16px; border-radius: 20px; display: inline-block; font-weight: 600; font-size: 12px;">
+                        ${product.category}
+                    </div>
+                </div>
+                
+                <div style="margin-top: 24px;">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 4px; font-size: 12px;">Barcode</div>
+                            <div>${product.barcode}</div>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 4px; font-size: 12px;">Quantity</div>
+                            <div>${product.quantity}</div>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 4px; font-size: 12px;">Expiry Date</div>
+                            <div>${formatDate(product.expiryDate)}</div>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 4px; font-size: 12px;">Status</div>
+                            <span class="status-badge ${statusClass}" style="margin-top: 2px; display: inline-block;">
+                                ${statusText}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 16px;">
+                        <div style="font-weight: 600; margin-bottom: 4px; font-size: 12px;">Days ${product.daysLeft < 0 ? 'Expired' : 'Left'}</div>
+                        <div style="font-weight: 700; color: ${product.daysLeft <= 3 ? '#ff416c' : product.daysLeft <= 7 ? '#f7971e' : '#56ab2f'}">
+                            ${Math.abs(product.daysLeft)} days
+                        </div>
+                    </div>
+                    
+                    ${notesHTML}
+                </div>
+            `;
+            
+            elements.productDetailsContent.innerHTML = modalHTML;
+            elements.productDetailsModal.classList.add('active');
+            playClickSound();
+        }
+
+        // Hide product details modal
+        function hideProductDetailsModal() {
+            elements.productDetailsModal.classList.remove('active');
+            AppState.currentProductToView = null;
+            playClickSound();
+        }
+
+        // ======================
+        // BULK OPERATIONS
+        // ======================
+
+        // Update selected expired items
+        function updateSelectedExpired() {
+            const checkboxes = document.querySelectorAll('.expired-checkbox:checked');
+            AppState.selectedExpired = Array.from(checkboxes).map(cb => cb.dataset.id);
+            
+            const selectedCount = document.getElementById('selectedCount');
+            if (selectedCount) {
+                selectedCount.textContent = AppState.selectedExpired.length;
+            }
+        }
+
+        // Update selected products
+        function updateSelectedProducts() {
+            const checkboxes = document.querySelectorAll('.product-checkbox:checked');
+            AppState.selectedProducts = Array.from(checkboxes).map(cb => cb.dataset.id);
+            
+            const selectedProductsCount = document.getElementById('selectedProductsCount');
+            if (selectedProductsCount) {
+                selectedProductsCount.textContent = AppState.selectedProducts.length;
+            }
+        }
+
+        // Toggle select all expired
+        function toggleSelectAllExpired() {
+            const selectAll = document.getElementById('selectAllExpired');
+            const checkboxes = document.querySelectorAll('.expired-checkbox');
+            
+            checkboxes.forEach(cb => {
+                cb.checked = selectAll.checked;
+            });
+            
+            updateSelectedExpired();
+        }
+
+        // Toggle select all products
+        function toggleSelectAllProducts() {
+            const selectAll = document.getElementById('selectAllHeader');
+            const checkboxes = document.querySelectorAll('.product-checkbox');
+            
+            checkboxes.forEach(cb => {
+                cb.checked = selectAll.checked;
+            });
+            
+            updateSelectedProducts();
+        }
+
+        // Bulk delete selected expired items
+        function bulkDeleteSelected() {
+            if (AppState.selectedExpired.length === 0) {
+                showToast('No items selected', 'warning');
+                return;
+            }
+            
+            if (!confirm(`Delete ${AppState.selectedExpired.length} expired items?`)) {
+                return;
+            }
+            
+            // Remove selected items
+            AppState.products = AppState.products.filter(product => 
+                !AppState.selectedExpired.includes(product.id)
+            );
+            
+            // Clear selection
+            AppState.selectedExpired = [];
+            
+            // Update displays
+            updateAllDisplays();
+            
+            // Show success message
+            showToast(`Deleted ${AppState.selectedExpired.length} expired items`, 'success');
+            playDeleteSound();
+            
+            // Save to local storage
+            saveToLocalStorage();
+        }
+
+        // Bulk delete selected products
+        function bulkDeleteSelectedProducts() {
+            if (AppState.selectedProducts.length === 0) {
+                showToast('No items selected', 'warning');
+                return;
+            }
+            
+            if (!confirm(`Delete ${AppState.selectedProducts.length} products?`)) {
+                return;
+            }
+            
+            // Remove selected items
+            AppState.products = AppState.products.filter(product => 
+                !AppState.selectedProducts.includes(product.id)
+            );
+            
+            // Clear selection
+            AppState.selectedProducts = [];
+            
+            // Update displays
+            updateAllDisplays();
+            
+            // Show success message
+            showToast(`Deleted ${AppState.selectedProducts.length} products`, 'success');
+            playDeleteSound();
+            
+            // Save to local storage
+            saveToLocalStorage();
+        }
+
+        // ======================
+        // IMPORT/EXPORT
+        // ======================
+
+        // Export data
+        function exportData() {
+            const data = {
+                products: AppState.products,
+                settings: AppState.settings,
+                notes: AppState.notes,
+                exportDate: new Date().toISOString(),
+                version: '1.0'
+            };
+            
+            const json = JSON.stringify(data, null, 2);
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `expiry-tracker-backup-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showToast('Data exported successfully', 'success');
+            playClickSound();
+        }
+
+        // Import data
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    if (!data.products || !Array.isArray(data.products)) {
+                        throw new Error('Invalid data format');
+                    }
+                    
+                    if (confirm('Replace current data with imported data?')) {
+                        AppState.products = data.products;
+                        
+                        // Update days left for all products
+                        AppState.products.forEach(product => {
+                            product.daysLeft = calculateDaysLeft(product.expiryDate);
+                        });
+                        
+                        if (data.notes) {
+                            AppState.notes = data.notes;
+                        }
+                        
+                        showToast(`Imported ${data.products.length} products`, 'success');
+                        updateAllDisplays();
+                        saveToLocalStorage();
+                    }
+                    
+                } catch (error) {
+                    showToast('Error importing data', 'error');
+                }
+            };
+            
+            reader.readAsText(file);
+            playClickSound();
+        }
+
+        // ======================
+        // UTILITY FUNCTIONS
+        // ======================
+
+        // Show toast notification
+        function showToast(message, type = 'info') {
+            if (!elements.toast || !elements.toastMessage) return;
+            
+            const toast = elements.toast;
+            const toastMessage = elements.toastMessage;
+            
+            // Set message and type
+            toastMessage.textContent = message;
+            toast.className = 'toast'; // Reset classes
+            
+            // Add type class
+            if (type === 'error') {
+                toast.classList.add('toast-error');
+                toast.querySelector('i').className = 'fas fa-exclamation-circle';
+            } else if (type === 'warning') {
+                toast.classList.add('toast-warning');
+                toast.querySelector('i').className = 'fas fa-exclamation-triangle';
+            } else if (type === 'success') {
+                toast.classList.add('toast-success');
+                toast.querySelector('i').className = 'fas fa-check-circle';
+            } else if (type === 'urgent') {
+                toast.classList.add('toast-urgent');
+                toast.querySelector('i').className = 'fas fa-bell';
+            } else {
+                toast.classList.add('toast-info');
+                toast.querySelector('i').className = 'fas fa-info-circle';
+            }
+            
+            // Show toast
+            toast.classList.add('active');
+            
+            // Auto hide after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('active');
+            }, 3000);
+        }
+
+        // Update current year in footer
+        function updateCurrentYear() {
+            const currentYear = document.getElementById('currentYear');
+            if (currentYear) {
+                currentYear.textContent = new Date().getFullYear();
+            }
+        }
+
+        // Initialize welcome screen
+        function initializeWelcomeScreen() {
+            // Check if already launched
+            const launched = localStorage.getItem('systemLaunched');
+            if (launched) {
+                elements.welcomeScreen.style.display = 'none';
+                elements.mainContainer.style.display = 'block';
+                loadFromLocalStorage();
+                startPeriodicChecks();
+            }
+        }
+
+        // Print data
+        function printData() {
+            window.print();
+        }
+
+        // ======================
+        // ALERT SYSTEM
+        // ======================
+
+        // Check for urgent items
+        function checkForUrgentItems() {
+            if (AppState.acknowledgedAlerts) return;
+            
+            const urgentItems = AppState.products.filter(p => 
+                p.daysLeft >= 0 && p.daysLeft <= AppState.settings.urgentThreshold
+            );
+            
+            if (urgentItems.length > 0) {
+                showUrgentAlert(urgentItems.length, urgentItems);
+                
+                // Start continuous alerts if enabled
+                if (AppState.settings.continuousAlert && !AppState.alertTimeout) {
+                    startContinuousAlerts();
+                }
+            }
+            
+            updateAlertIndicator();
+        }
+
+        // Show urgent alert
+        function showUrgentAlert(count, items) {
+            // Update alert indicator
+            if (elements.alertCountText) {
+                elements.alertCountText.textContent = `${count} items expiring soon!`;
+            }
+            
+            if (elements.soundAlertIndicator) {
+                elements.soundAlertIndicator.classList.add('active');
+            }
+            
+            // Play alert sound if enabled
+            if (AppState.settings.immediateAlert) {
+                playAlertSound();
+            }
+            
+            // Show urgent toast
+            if (count > 0) {
+                showToast(`${count} urgent items need attention!`, 'urgent');
+            }
+        }
+
+        // Play alert sound
+        function playAlertSound() {
+            try {
+                playDefaultAlertSound();
+            } catch (e) {
+                console.log('Alert sound error:', e);
+            }
+        }
+
+        // Play default alert sound
+        function playDefaultAlertSound() {
+            try {
+                if (!audioElements.alert.src) {
+                    // Generate a simple beep sound
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.value = 800;
+                    oscillator.type = 'sine';
+                    
+                    gainNode.gain.setValueAtTime(0.5, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                    
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.5);
+                } else {
+                    audioElements.alert.volume = AppState.settings.alertVolume / 100;
+                    audioElements.alert.currentTime = 0;
+                    audioElements.alert.play().catch(e => {
+                        console.log('Alert sound play failed:', e);
+                    });
+                }
+            } catch (e) {
+                console.log('Audio error:', e);
+            }
+        }
+
+        // Stop all sounds
+        function stopAllSounds() {
+            try {
+                Object.values(audioElements).forEach(audio => {
+                    if (audio && typeof audio.pause === 'function') {
+                        audio.pause();
+                        audio.currentTime = 0;
+                    }
+                });
+            } catch (e) {
+                console.log('Error stopping sounds:', e);
+            }
+        }
+
+        // Start continuous alerts
+        function startContinuousAlerts() {
+            if (AppState.alertTimeout) {
+                clearTimeout(AppState.alertTimeout);
+            }
+            
+            const frequency = getAlertFrequencyMs();
+            
+            AppState.alertTimeout = setTimeout(() => {
+                if (!AppState.acknowledgedAlerts) {
+                    const urgentItems = AppState.products.filter(p => 
+                        p.daysLeft >= 0 && p.daysLeft <= AppState.settings.urgentThreshold
+                    );
+                    
+                    if (urgentItems.length > 0) {
+                        playAlertSound();
+                        startContinuousAlerts(); // Continue
+                    }
+                }
+            }, frequency);
+        }
+
+        // Get alert frequency in milliseconds
+        function getAlertFrequencyMs() {
+            switch(AppState.settings.alertFrequency) {
+                case 'once': return 0;
+                case '5min': return 5 * 60 * 1000;
+                case '15min': return 15 * 60 * 1000;
+                case '30min': return 30 * 60 * 1000;
+                case 'hourly': return 60 * 60 * 1000;
+                default: return 5 * 60 * 1000;
+            }
+        }
+
+        // Acknowledge alerts
+        function acknowledgeAlerts() {
+            AppState.acknowledgedAlerts = true;
+            
+            if (elements.soundAlertIndicator) {
+                elements.soundAlertIndicator.classList.remove('active');
+            }
+            
+            showToast('Alerts acknowledged', 'success');
+            playClickSound();
+            
+            // Stop all sounds
+            stopAllSounds();
+            
+            // Clear continuous alert timeout
+            if (AppState.alertTimeout) {
+                clearTimeout(AppState.alertTimeout);
+                AppState.alertTimeout = null;
+            }
+        }
+
+        // Trigger immediate alert
+        function triggerImmediateAlert(message) {
+            if (AppState.settings.immediateAlert) {
+                playAlertSound();
+                showToast(message, 'urgent');
+            }
+        }
+
+        // Update alert indicator
+        function updateAlertIndicator() {
+            const urgentItems = AppState.products.filter(p => 
+                p.daysLeft >= 0 && p.daysLeft <= AppState.settings.urgentThreshold
+            );
+            
+            if (urgentItems.length > 0 && !AppState.acknowledgedAlerts) {
+                if (elements.soundAlertIndicator) {
+                    elements.soundAlertIndicator.classList.add('active');
+                }
+                if (elements.alertCountText) {
+                    elements.alertCountText.textContent = `${urgentItems.length} items expiring soon!`;
+                }
+            } else {
+                if (elements.soundAlertIndicator) {
+                    elements.soundAlertIndicator.classList.remove('active');
+                }
+            }
+        }
+
+        // Start periodic checks
+        function startPeriodicChecks() {
+            if (AppState.alertInterval) {
+                clearInterval(AppState.alertInterval);
+            }
+            
+            AppState.alertInterval = setInterval(() => {
+                checkForUrgentItems();
+            }, 60000); // Check every minute
+        }
+
+        // ======================
+        // SOUND MANAGEMENT
+        // ======================
+
+        // Initialize sound effects
+        function initializeSoundEffects() {
+            try {
+                // Save sound
+                audioElements.save.src = generateToneURL(800, 0.3, 0.3);
+                
+                // Delete sound
+                audioElements.delete.src = generateToneURL(400, 0.3, 0.3);
+                
+                // Alert sound
+                audioElements.alert.src = generateToneURL(600, 0.5, 0.8);
+                
+                // Notification sound
+                audioElements.notification.src = generateToneURL(1000, 0.4, 0.2);
+                
+                // Click sound
+                audioElements.click.src = generateClickSoundURL();
+                
+                // Set initial volumes
+                updateAlertVolume(80);
+                
+            } catch (e) {
+                console.log('Error initializing sound effects:', e);
+            }
+        }
+
+        // Generate tone as data URL
+        function generateToneURL(frequency, volume, duration) {
+            try {
+                const sampleRate = 44100;
+                const channels = 1;
+                const samples = Math.floor(sampleRate * duration);
+                
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const buffer = audioContext.createBuffer(channels, samples, sampleRate);
+                const channelData = buffer.getChannelData(0);
+                
+                // Generate sine wave
+                for (let i = 0; i < samples; i++) {
+                    const time = i / sampleRate;
+                    channelData[i] = Math.sin(2 * Math.PI * frequency * time) * volume * Math.exp(-time * 2);
+                }
+                
+                // Convert to WAV
+                const wav = audioBufferToWav(buffer);
+                return URL.createObjectURL(new Blob([wav], { type: 'audio/wav' }));
+            } catch (e) {
+                console.log('Error generating tone:', e);
+                return 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAZGF0YQ';
+            }
+        }
+
+        // Generate click sound
+        function generateClickSoundURL() {
+            try {
+                const sampleRate = 44100;
+                const duration = 0.1;
+                const samples = Math.floor(sampleRate * duration);
+                
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const buffer = audioContext.createBuffer(1, samples, sampleRate);
+                const channelData = buffer.getChannelData(0);
+                
+                // Generate click
+                for (let i = 0; i < samples; i++) {
+                    const time = i / sampleRate;
+                    if (time < 0.01) {
+                        channelData[i] = Math.random() * 0.5;
+                    } else {
+                        channelData[i] = 0;
+                    }
+                }
+                
+                const wav = audioBufferToWav(buffer);
+                return URL.createObjectURL(new Blob([wav], { type: 'audio/wav' }));
+            } catch (e) {
+                console.log('Error generating click sound:', e);
+                return generateToneURL(200, 0.1, 0.05);
+            }
+        }
+
+        // Convert AudioBuffer to WAV
+        function audioBufferToWav(buffer) {
+            const numChannels = buffer.numberOfChannels;
+            const sampleRate = buffer.sampleRate;
+            const format = 1;
+            const bitDepth = 16;
+            
+            const bytesPerSample = bitDepth / 8;
+            const blockAlign = numChannels * bytesPerSample;
+            
+            const wav = new Uint8Array(44 + buffer.length * blockAlign);
+            const view = new DataView(wav.buffer);
+            
+            // Write WAV header
+            writeString(view, 0, 'RIFF');
+            view.setUint32(4, 36 + buffer.length * blockAlign, true);
+            writeString(view, 8, 'WAVE');
+            writeString(view, 12, 'fmt ');
+            view.setUint32(16, 16, true);
+            view.setUint16(20, format, true);
+            view.setUint16(22, numChannels, true);
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, sampleRate * blockAlign, true);
+            view.setUint16(32, blockAlign, true);
+            view.setUint16(34, bitDepth, true);
+            writeString(view, 36, 'data');
+            view.setUint32(40, buffer.length * blockAlign, true);
+            
+            // Write audio data
+            const channelData = buffer.getChannelData(0);
+            for (let i = 0; i < channelData.length; i++) {
+                const sample = Math.max(-1, Math.min(1, channelData[i]));
+                const intSample = sample < 0 ? sample * 32768 : sample * 32767;
+                view.setInt16(44 + i * 2, intSample, true);
+            }
+            
+            return wav;
+        }
+
+        function writeString(view, offset, string) {
+            for (let i = 0; i < string.length; i++) {
+                view.setUint8(offset + i, string.charCodeAt(i));
+            }
+        }
+
+        // Play save sound
+        function playSaveSound() {
+            try {
+                audioElements.save.currentTime = 0;
+                audioElements.save.volume = AppState.settings.alertVolume / 100 * 0.3;
+                audioElements.save.play().catch(e => {
+                    console.log('Save sound play failed:', e);
+                });
+            } catch (e) {
+                console.log('Save sound error:', e);
+            }
+        }
+
+        // Play delete sound
+        function playDeleteSound() {
+            try {
+                audioElements.delete.currentTime = 0;
+                audioElements.delete.volume = AppState.settings.alertVolume / 100 * 0.3;
+                audioElements.delete.play().catch(e => {
+                    console.log('Delete sound play failed:', e);
+                });
+            } catch (e) {
+                console.log('Delete sound error:', e);
+            }
+        }
+
+        // Play click sound
+        function playClickSound() {
+            try {
+                audioElements.click.currentTime = 0;
+                audioElements.click.volume = AppState.settings.alertVolume / 100 * 0.2;
+                audioElements.click.play().catch(e => {
+                    console.log('Click sound play failed:', e);
+                });
+            } catch (e) {
+                console.log('Click sound error:', e);
+            }
+        }
+
+        // Update alert volume
+        function updateAlertVolume(volume) {
+            AppState.settings.alertVolume = volume;
+            
+            // Update all audio volumes
+            try {
+                const vol = volume / 100;
+                audioElements.save.volume = vol * 0.3;
+                audioElements.delete.volume = vol * 0.3;
+                audioElements.alert.volume = vol * 0.5;
+                audioElements.notification.volume = vol * 0.4;
+                audioElements.click.volume = vol * 0.2;
+                audioElements.custom.volume = vol * 0.5;
+            } catch (e) {
+                console.log('Volume update error:', e);
+            }
+        }
+
+        // ======================
+        // LOCAL STORAGE MANAGEMENT
+        // ======================
+
+        // Save to localStorage
+        function saveToLocalStorage() {
+            try {
+                const saveData = {
+                    products: AppState.products,
+                    settings: AppState.settings,
+                    notes: AppState.notes,
+                    systemLaunched: true,
+                    lastSave: new Date().toISOString(),
+                    version: '1.0'
+                };
+                
+                localStorage.setItem('expiryTrackerData', JSON.stringify(saveData));
+            } catch (e) {
+                console.error('Error saving to localStorage:', e);
+                showToast('Error saving data', 'error');
+            }
+        }
+
+        // Load from localStorage
+        function loadFromLocalStorage() {
+            try {
+                const savedData = localStorage.getItem('expiryTrackerData');
+                if (savedData) {
+                    const data = JSON.parse(savedData);
+                    
+                    if (data.products) {
+                        AppState.products = data.products;
+                        
+                        // Update days left for all products
+                        AppState.products.forEach(product => {
+                            product.daysLeft = calculateDaysLeft(product.expiryDate);
+                        });
+                    }
+                    
+                    if (data.settings) {
+                        AppState.settings = { ...AppState.settings, ...data.settings };
+                    }
+                    
+                    if (data.notes) {
+                        AppState.notes = data.notes;
+                    }
+                    
+                    // Update all displays
+                    updateAllDisplays();
+                }
+            } catch (e) {
+                console.error('Error loading from localStorage:', e);
+            }
+        }
+
+        // ======================
+        // KEYBOARD SHORTCUTS
+        // ======================
+
+        // Handle keyboard shortcuts
+        function handleKeyboardShortcuts(e) {
+            // Don't trigger if user is typing in an input
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+                return;
+            }
+            
+            // Number keys 1-4 - Navigate sections
+            if (e.key >= '1' && e.key <= '4') {
+                e.preventDefault();
+                const sections = ['expiring', 'expired', 'add', 'all'];
+                const index = parseInt(e.key) - 1;
+                if (sections[index]) {
+                    switchSection(sections[index]);
+                }
+            }
+            
+            // Q - Quick add
+            if (e.key === 'q' || e.key === 'Q') {
+                e.preventDefault();
+                switchSection('add');
+                playClickSound();
+            }
+            
+            // ESC - Close modals
+            if (e.key === 'Escape') {
+                if (elements.deleteModal && elements.deleteModal.classList.contains('active')) {
+                    hideDeleteModal();
+                }
+                
+                if (elements.productDetailsModal && elements.productDetailsModal.classList.contains('active')) {
+                    hideProductDetailsModal();
+                }
+            }
+            
+            // A - Acknowledge alerts
+            if (e.key === 'a' || e.key === 'A') {
+                if (elements.soundAlertIndicator && elements.soundAlertIndicator.classList.contains('active')) {
+                    e.preventDefault();
+                    acknowledgeAlerts();
+                }
+            }
+        }
+
+        // Final initialization
+        console.log('Smart Expiry Tracker Mobile v1.0 - Initialized');
+
+        // Auto-save every minute
+        setInterval(saveToLocalStorage, 60000);
+
+        // Update display every 30 seconds to refresh days left
+        setInterval(() => {
+            AppState.products.forEach(product => {
+                product.daysLeft = calculateDaysLeft(product.expiryDate);
+            });
+            updateAllDisplays();
+        }, 30000);
+
+        // Reset acknowledged alerts every day
+        setInterval(() => {
+            AppState.acknowledgedAlerts = false;
+            checkForUrgentItems();
+        }, 24 * 60 * 60 * 1000);
+
+        // Initialize the system fully
+        setTimeout(() => {
+            if (elements.mainContainer.style.display !== 'none') {
+                checkForUrgentItems();
+                updateAllDisplays();
+            }
+        }, 2000);
+    </script>
+</body>
+</html>
